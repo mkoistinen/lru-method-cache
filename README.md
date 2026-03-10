@@ -2,8 +2,8 @@
 
 [![CI](https://github.com/mkoistinen/lru-method-cache/actions/workflows/ci.yml/badge.svg)](https://github.com/mkoistinen/lru-method-cache/actions/workflows/ci.yml)
 [![codecov](https://codecov.io/gh/mkoistinen/lru-method-cache/branch/main/graph/badge.svg)](https://codecov.io/gh/mkoistinen/lru-method-cache)
-[![PyPI](https://img.shields.io/pypi/v/lru-method-cache)](https://pypi.org/project/lru-method-cache/)
-[![Python](https://img.shields.io/pypi/pyversions/lru-method-cache)](https://pypi.org/project/lru-method-cache/)
+[![PyPI](https://img.shields.io/pypi/v/lru-method-cache?v=2)](https://pypi.org/project/lru-method-cache/)
+[![Python](https://img.shields.io/pypi/pyversions/lru-method-cache?v=2)](https://pypi.org/project/lru-method-cache/)
 
 A drop-in replacement for `functools.lru_cache` designed for methods.
 
