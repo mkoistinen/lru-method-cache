@@ -1,9 +1,9 @@
-# method-tools
+# lru-method-cache
 
-[![CI](https://github.com/mkoistinen/method-tools/actions/workflows/ci.yml/badge.svg)](https://github.com/mkoistinen/method-tools/actions/workflows/ci.yml)
-[![codecov](https://codecov.io/gh/mkoistinen/method-tools/branch/main/graph/badge.svg)](https://codecov.io/gh/mkoistinen/method-tools)
-[![PyPI](https://img.shields.io/pypi/v/method-tools)](https://pypi.org/project/method-tools/)
-[![Python](https://img.shields.io/pypi/pyversions/method-tools)](https://pypi.org/project/method-tools/)
+[![CI](https://github.com/mkoistinen/lru-method-cache/actions/workflows/ci.yml/badge.svg)](https://github.com/mkoistinen/lru-method-cache/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/mkoistinen/lru-method-cache/branch/main/graph/badge.svg)](https://codecov.io/gh/mkoistinen/lru-method-cache)
+[![PyPI](https://img.shields.io/pypi/v/lru-method-cache)](https://pypi.org/project/lru-method-cache/)
+[![Python](https://img.shields.io/pypi/pyversions/lru-method-cache)](https://pypi.org/project/lru-method-cache/)
 
 A drop-in replacement for `functools.lru_cache` designed for methods.
 
@@ -37,7 +37,7 @@ library. Here are some references to learn more.
 
 ## The solution
 
-`method-tools` provides `lru_method_cache`, which stores the cache
+`lru-method-cache` provides `lru_method_cache`, which stores the cache
 **per instance** using a descriptor. When an instance is garbage
 collected, its cache is automatically cleaned up via `weakref.finalize`.
 
@@ -141,11 +141,11 @@ There are certain other clever solutions for the issue of using `lru_cache` on c
 | `functools.lru_cache` | No | No | No | Yes |
 | [`methodtools`](https://github.com/clee704/methodtools)`.lru_cache` | Yes | No | Yes | Yes |
 | [`cachetools`](https://github.com/tkem/cachetools) + manual wiring | Yes | No | Manual | Manual |
-| **[`method_tools`](https://github.com/mkoistinen/method-tools)`.lru_method_cache`** | **Yes** | **Yes** | **Yes** | **Yes** |
+| **[`method_tools`](https://github.com/mkoistinen/lru-method-cache)`.lru_method_cache`** | **Yes** | **Yes** | **Yes** | **Yes** |
 
 ## Design philosophy
 
-`method-tools` uses only Python's standard library — no third-party
+`lru-method-cache` uses only Python's standard library — no third-party
 dependencies. The implementation is a single, short module that is easy
 to read, inspect, and audit. If you want to understand exactly what your
 caching decorator does, you can review the entire source in a few
@@ -154,7 +154,7 @@ moments.
 ## Installation
 
 ```bash
-pip install method-tools
+pip install lru-method-cache
 ```
 
 ## Requirements
