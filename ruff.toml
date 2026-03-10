@@ -1,0 +1,234 @@
+# Comprehensive best practices configuration for linting and formatting
+
+# Target Python 3.10+
+target-version = "py310"
+
+# Line length
+line-length = 79
+
+# Indentation width
+indent-width = 4
+
+# Enable preview features for cutting-edge rules
+preview = true
+
+# Exclude common directories
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".hg",
+    ".ipynb_checkpoints",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pyenv",
+    ".pytest_cache",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    ".vscode",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "site-packages",
+    "venv",
+]
+
+[lint]
+# Enable comprehensive rule sets
+select = [
+    "F",      # Pyflakes
+    "E",      # pycodestyle errors
+    "W",      # pycodestyle warnings
+    "C90",    # mccabe complexity
+    "I",      # isort
+    "N",      # pep8-naming
+    "D",      # pydocstyle
+    "UP",     # pyupgrade
+    "YTT",    # flake8-2020
+    "ANN",    # flake8-annotations
+    "ASYNC",  # flake8-async
+    "S",      # flake8-bandit
+    "BLE",    # flake8-blind-except
+    "FBT",    # flake8-boolean-trap
+    "B",      # flake8-bugbear
+    "A",      # flake8-builtins
+    "COM",    # flake8-commas
+    "CPY",    # flake8-copyright
+    "C4",     # flake8-comprehensions
+    "DTZ",    # flake8-datetimez
+    "T10",    # flake8-debugger
+    "EM",     # flake8-errmsg
+    "EXE",    # flake8-executable
+    "FA",     # flake8-future-annotations
+    "ISC",    # flake8-implicit-str-concat
+    "ICN",    # flake8-import-conventions
+    "LOG",    # flake8-logging
+    "G",      # flake8-logging-format
+    "INP",    # flake8-no-pep420
+    "PIE",    # flake8-pie
+    # "T20",    # flake8-print
+    "PYI",    # flake8-pyi
+    "PT",     # flake8-pytest-style
+    "Q",      # flake8-quotes
+    "RSE",    # flake8-raise
+    "RET",    # flake8-return
+    "SLF",    # flake8-self
+    "SLOT",   # flake8-slots
+    "SIM",    # flake8-simplify
+    "TID",    # flake8-tidy-imports
+    "TC",     # flake8-type-checking
+    "INT",    # flake8-gettext
+    "ARG",    # flake8-unused-arguments
+    "PTH",    # flake8-use-pathlib
+    "TD",     # flake8-todos
+    "FIX",    # flake8-fixme
+    "ERA",    # eradicate
+    "PD",     # pandas-vet
+    "PGH",    # pygrep-hooks
+    "PL",     # Pylint
+    "TRY",    # tryceratops
+    "FLY",    # flynt
+    "NPY",    # NumPy-specific rules
+    "PERF",   # Perflint
+    "FURB",   # refurb
+    "RUF",    # Ruff-specific rules
+]
+
+# Ignore specific rules that may be too strict or opinionated
+ignore = [
+    "D203",    # one-blank-line-before-class (conflicts with D211)
+    "D213",    # multi-line-summary-second-line (conflicts with D212)
+    "ERA001",  # Don't complain about commented out code.
+    "ANN401",  # any-type (sometimes Any is appropriate)
+    "COM812",  # missing-trailing-comma (conflicts with formatter)
+    "ISC001",  # single-line-implicit-string-concatenation (conflicts with formatter)
+    "E501",    # line-too-long (handled by formatter)
+    "S101",    # use of assert (common in tests)
+    "TD002",   # missing-todo-author (too strict for personal projects)
+    "TD003",   # missing-todo-link (too strict for personal projects)
+    "FIX002",  # line-contains-todo (conflicts with TD rules)
+    "CPY001",  # missing-copyright-notice (uncomment if you want copyright enforcement)
+    "TRY003",  # avoid using long messages when raising an exception.
+    "D100",    # docstring for module
+    "PLR0904", # Too many public methods
+]
+
+# Allow fix for all enabled rules (when `--fix` is provided)
+fixable = ["ALL"]
+unfixable = []
+
+[lint.per-file-ignores]
+# Test files can use magic values, assertions, and relative imports
+"**/tests/**/*.py" = [
+    "S101",    # assert
+    "PLR2004", # magic-value-comparison
+    "PLR6301", # could-be-static (test methods need self for pytest)
+    "ANN",     # type annotations
+    "D",       # docstrings
+    "ARG",     # unused arguments (fixtures)
+    "FBT",     # boolean-trap
+    "SLF001",  # private-member-access (tests verify internals)
+]
+
+# __init__.py files can have unused imports
+"__init__.py" = ["F401", "D104"]
+
+# Configuration files can be more lenient
+"conftest.py" = ["D", "INP001"]
+
+[lint.isort]
+# isort configuration
+combine-as-imports = true
+force-wrap-aliases = true
+known-first-party = ["method_tools"]
+known-third-party = ["pytest"]
+lines-after-imports = 2
+section-order = [
+    "future",
+    "standard-library",
+    "third-party",
+    "first-party",
+    "local-folder",
+]
+
+[lint.flake8-annotations]
+# Allow dynamically typed expressions (typing.Any) in annotations
+allow-star-arg-any = false
+
+[lint.flake8-bandit]
+# Bandit configuration for security checks
+check-typed-exception = true
+
+[lint.flake8-builtins]
+# Builtins allowed to be shadowed
+builtins-ignorelist = ["id", "type", "input", "filter", "format"]
+
+[lint.flake8-comprehensions]
+# Allow dict calls that make use of keyword arguments
+allow-dict-calls-with-keyword-arguments = false
+
+[lint.flake8-pytest-style]
+# pytest style configuration
+fixture-parentheses = true
+mark-parentheses = true
+parametrize-names-type = "tuple"
+parametrize-values-row-type = "tuple"
+parametrize-values-type = "list"
+
+[lint.flake8-quotes]
+# Quote style configuration
+docstring-quotes = "double"
+inline-quotes = "double"
+multiline-quotes = "double"
+
+[lint.flake8-type-checking]
+# Enforce TC rules even when `from __future__ import annotations` is present
+strict = true
+
+[lint.mccabe]
+# Maximum cyclomatic complexity
+max-complexity = 15
+
+[lint.pep8-naming]
+classmethod-decorators = [
+    "classmethod",
+]
+
+[lint.pydocstyle]
+# Use NumPy-style docstrings
+convention = "numpy"
+
+[lint.pylint]
+# Maximum number of arguments for function / method
+max-args = 7
+# Maximum number of boolean expressions in an if statement
+max-bool-expr = 5
+# Maximum number of branches for function / method body
+max-branches = 15
+# Maximum number of local variables for function / method body
+max-locals = 15
+# Maximum number of return / yield for function / method body
+max-returns = 6
+# Maximum number of statements in function / method body
+max-statements = 50
+
+[format]
+# Formatting options (Black-compatible)
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+docstring-code-format = true
+docstring-code-line-length = 72
+
+# Preview formatting features
+preview = true
